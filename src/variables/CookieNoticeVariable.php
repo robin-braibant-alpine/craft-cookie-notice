@@ -40,7 +40,7 @@ class CookieNoticeVariable
             $this->cookiePolicy = Entry::find()->section('cookiePolicy')->one();
         }
 
-//        try {
+       try {
         if (isset($settings['modal']) && !empty($settings['modal'])) {
             $this->modal = [
                 'template' => $settings['modal'],
@@ -66,10 +66,9 @@ class CookieNoticeVariable
         }
 
         Craft::$app->getView()->registerAssetBundle($this->assetBundle, View::POS_END);
-        return true;
-//        } catch (LoaderError|RuntimeError|SyntaxError|Exception $e) {
-//            Craft::error($e->getMessage(), "cookie-notice");
-//        }
+       } catch (LoaderError|RuntimeError|SyntaxError|Exception $e) {
+           Craft::error($e->getMessage(), "cookie-notice");
+       }
     }
 
     private function isBot($userAgent = '/bot|crawl|facebook|google|slurp|spider|mediapartners/i'): bool
