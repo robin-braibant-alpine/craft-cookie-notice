@@ -3,6 +3,7 @@
 namespace alpinedigital\cookienotice\variables;
 
 use alpinedigital\cookienotice\assetbundles\cookienotice\CookieNoticeAsset;
+use alpinedigital\cookienotice\assetbundles\cookienotice\CookieNoticeNoStyleAsset;
 use Craft;
 use craft\elements\Entry;
 use craft\web\View;
@@ -27,6 +28,8 @@ class CookieNoticeVariable
     private $overlay = 'cookie-notice/_overlay';
 
     private $assetBundle = CookieNoticeAsset::class;
+    private $assetBundleNoStyle = CookieNoticeNoStyleAsset::class;
+
 
     public function render(array $settings = [])
     {
@@ -65,7 +68,20 @@ class CookieNoticeVariable
             echo \Craft::$app->getView()->renderTemplate($this->overlay, [], View::TEMPLATE_MODE_CP);
         }
 
-        Craft::$app->getView()->registerAssetBundle($this->assetBundle, View::POS_END);
+        if(isset($settings['style'])) {
+            if (!$settings['style']) {
+
+                Craft::$app->getView()->registerAssetBundle($this->assetBundleNoStyle, View::POS_END);
+            } else {
+
+                Craft::$app->getView()->registerAssetBundle($this->assetBundle, View::POS_END);
+            }
+        } else {
+
+            Craft::$app->getView()->registerAssetBundle($this->assetBundle, View::POS_END);
+        }
+
+
        } catch (LoaderError|RuntimeError|SyntaxError|Exception $e) {
            Craft::error($e->getMessage(), "cookie-notice");
        }
