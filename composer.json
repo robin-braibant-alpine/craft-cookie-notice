@@ -1,0 +1,44 @@
+{
+  "name": "alpinedigital/craft-cookie-notice",
+  "description": "A Craft CMS plugin that gives you the cookie notice functionality",
+  "type": "craft-plugin",
+  "keywords": ["craft", "cms", "craftcms", "craft-plugin", "cookies", "notice"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alpine Digital",
+      "homepage": "https://www.alpinedigtal.be"
+    },
+    {
+      "name": "Robin Braibant",
+      "homepage": "https://www.alpinedigtal.be"
+    }
+  ],
+  "support": {
+    "email": "info@alpinedigital.be",
+    "issues": "https://github.com/developer/repo/issues?state=open",
+    "source": "https://github.com/developer/repo",
+    "docs": "https://github.com/developer/repo/blob/master/README.md"
+  },
+  "require": {
+    "craftcms/cms": "^4.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "alpinedigital\\cookienotice\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Cookie Notice",
+    "handle": "cookie-notice",
+    "schemaVersion": "1.0.0.",
+    "developer": "Alpine Digital",
+    "class": "alpinedigital\\cookienotice\\CookieNotice"
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}

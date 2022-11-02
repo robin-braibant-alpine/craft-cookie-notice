@@ -1,0 +1,67 @@
+<div class="cookienotice-modal hidden" id="cookienoticeModal" role="dialog" aria-modal="true" aria-labelledby="cookie_settings_title"
+     tabindex="-1">
+    <div class="cookienotice-modal__content">
+        <button :title="'Sluit cookie instellingen'|t('cookie-notice')"
+                class="button cookienotice-modal__close-action js-modal-close-btn notranslate">
+            &times;
+        </button>
+        <h1 id="cookie_settings_title">{{ 'Cookie-instellingen'|t('cookie-notice') }}</h1>
+        <p>
+            {{ 'Onze website bewaart vier soorten cookies. Je kan zelf op elk moment kiezen welke je aanvaardt en welke niet. Meer informatie over wat cookies zijn en welke types cookies we verzamelen kan je lezen in ons <a href="{cookieLink}" target="_blank" class="underline hover:no-underline">cookiebeleid</a>.'|t('cookie-notice',{cookieLink: cookiePage.getUrl() ?? craft.entries.section('cookiePolicy').one().getUrl() ?? ''})|raw }}
+        </p>
+        <div class="cookienotice-modal__actions">
+            <a href="#"
+               class="button-cookie js-cookie-accept notranslate">{{ 'Alle cookies aanvaarden'|t('cookie-notice') }}</a>
+        </div>
+        <h2>{{ 'Je voorkeuren aanpassen'|t('cookie-notice') }}</h2>
+        <form class="cookienotice-modal__form">
+            <div>
+                <div class="cookienotice-modal__options">
+                    <div class="cookienotice-modal__checks">
+                        <input class="js-cookie-essential" type="checkbox" name="essential" id="essential"
+                               disabled="disabled" checked="checked">
+                        <label for="essential">{{ 'Essentiële cookies'|t('cookie-notice') }}</label>
+                    </div>
+                    <div class="cookienotice-modal__description">
+                        {{ 'zijn om technische redenen noodzakelijk voor de goede werking. Zonder deze cookies zou het kunnen dat de website niet naar behoren functioneert.'|t('cookie-notice') }}
+                    </div>
+                </div>
+                <div class="cookienotice-modal__options">
+                    <div class="cookienotice-modal__checks">
+                        <input class="js-cookie-essential" type="checkbox" name="essential" id="functional"
+                               disabled="disabled" checked="checked">
+                        <label for="essential">{{ 'Functionele cookies'|t('cookie-notice') }}</label>
+                    </div>
+                    <div class="cookienotice-modal__description">
+                        {{ 'zijn noodzakelijk voor bepaalde functies op de website. Zonder deze cookies kunnen sommige onderdelen onbruikbaar worden.'|t('cookie-notice') }}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="cookienotice-modal__options">
+                    <div class="cookienotice-modal__checks">
+                        <input class="js-cookie-performance" type="checkbox" name="CookiePerformance" id="performance"
+                               value="2">
+                        <label for="performance">{{ 'Analytische cookies'|t('cookie-notice') }}</label>
+                    </div>
+                    <div class="cookienotice-modal__description">
+                        {{ 'laten ons toe om het gebruik van de website anoniem te analyseren en de gebruikservaring te verbeteren.'|t('cookie-notice') }}
+                    </div>
+                </div>
+                <div class="cookienotice-modal__options">
+                    <div class="cookienotice-modal__checks">
+                        <input class="js-cookie-marketing" type="checkbox" name="CookieMarketing" id="marketing" value="3">
+                        <label for="marketing">{{ 'Marketingcookies'|t('cookie-notice') }}</label>
+                    </div>
+                    <div class="cookienotice-modal__description">
+                        {{ 'hebben als doel het personaliseren van de gebruikservaring en het tonen van relevante inhoud en aanbiedingen op deze en andere websites.'|t('cookie-notice') }}
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="cookienotice-modal__actions">
+            <a href="#"
+               class="button-cookie js-modal-close notranslate">{{ 'Mijn keuze bewaren'|t('cookie-notice') }}</a>
+        </div>
+    </div>
+</div>
