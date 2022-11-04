@@ -31,7 +31,7 @@
   "extra": {
     "name": "Cookie Notice",
     "handle": "cookie-notice",
-    "schemaVersion": "1.0.0.",
+    "schemaVersion": "1.0.0",
     "developer": "Alpine Digital",
     "class": "alpinedigital\\cookienotice\\CookieNotice"
   },
