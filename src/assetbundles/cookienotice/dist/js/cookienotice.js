@@ -44,6 +44,10 @@ if (shouldRun && cookieBanner) {
     document.addEventListener('click', clickListener);
 }
 
+if (doormatButton) {
+    document.body.addEventListener("click", clickListener);
+}
+
 function clickListener(event) {
     const element = event.target;
     if (!element) {
