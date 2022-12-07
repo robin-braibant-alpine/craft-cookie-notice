@@ -14,8 +14,6 @@ const cookieBanner = document.getElementById('cookienotice-banner');
 const cookieOverlay = document.getElementById('cookienotice-overlay');
 const cookieModal = document.getElementById('cookienoticeModal');
 const closeButton = document.querySelector('.js-modal-close-btn');
-// ToDo: Add to the footer
-const doormatButton = document.querySelector('.js-cookie-settings');
 
 if (shouldRun && cookieBanner) {
     cookieBanner.classList.remove('hidden');
@@ -40,21 +38,16 @@ if (shouldRun && cookieBanner) {
             triggerEvent('cookie-closed');
         }
     }, 500);
-
-    document.addEventListener('click', clickListener);
 }
 
-if (doormatButton) {
-    document.body.addEventListener("click", clickListener);
-}
+document.addEventListener('click', clickListener);
 
 function clickListener(event) {
     const element = event.target;
     if (!element) {
         return;
     }
-
-    // ToDo: add class to footer
+    
     if (element.classList) {
         if (element.classList.contains('js-cookie-settings')) {
             event.preventDefault();
