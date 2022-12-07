@@ -47,7 +47,7 @@ function clickListener(event) {
     if (!element) {
         return;
     }
-    
+
     if (element.classList) {
         if (element.classList.contains('js-cookie-settings')) {
             event.preventDefault();
@@ -92,12 +92,14 @@ function clickListener(event) {
             cookieOverlay.classList.add('hidden');
             setMainContentBlockInert(false);
             triggerEvent('cookienotice-closed');
+            location.reload();
         } else if (element.classList.contains('js-modal-close-btn')) {
             event.preventDefault();
             cookieModal.classList.toggle('hidden');
             cookieOverlay.classList.add('hidden');
             setMainContentBlockInert(false);
             triggerEvent('cookienotice-closed');
+            location.reload();
         } else if (element.classList.contains('js-cookie-performance')) {
             updateCheckbox('performance');
         } else if (element.classList.contains('js-cookie-marketing')) {
@@ -112,6 +114,7 @@ function closeCookieNotice() {
     cookieModal.classList.add('hidden');
     setMainContentBlockInert(false);
     triggerEvent('cookienotice-closed');
+    location.reload();
 }
 
 function getCookie(key) {
