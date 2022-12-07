@@ -87,6 +87,13 @@ class CookieNoticeVariable
        }
     }
 
+    public function getCookie() {
+        if (isset($_COOKIE["__cookie_consent"])) {
+            return $_COOKIE["__cookie_consent"];
+        }
+        return "";
+    }
+
     private function isBot($userAgent = '/bot|crawl|facebook|google|slurp|spider|mediapartners/i'): bool
     {
         try {
