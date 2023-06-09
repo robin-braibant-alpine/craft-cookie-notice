@@ -14,6 +14,7 @@ const cookieBanner = document.getElementById('cookienotice-banner');
 const cookieOverlay = document.getElementById('cookienotice-overlay');
 const cookieModal = document.getElementById('cookienoticeModal');
 const closeButton = document.querySelector('.js-modal-close-btn');
+const htmlElement = document.documentElement;
 
 if (shouldRun && cookieBanner) {
     cookieBanner.classList.remove('hidden');
@@ -180,10 +181,12 @@ function setMainContentBlockInert(set = true) {
     if (mainContentBlock && set) {
         mainContentBlock.setAttribute('inert', '');
         mainContentBlock.classList.add('overflow-hidden');
+        htmlElement.classList.add('overflow-hidden');
     }
     if (mainContentBlock && !set) {
         mainContentBlock.removeAttribute('inert');
         mainContentBlock.classList.remove('overflow-hidden');
+        htmlElement.classList.remove('overflow-hidden');
     }
 }
 
