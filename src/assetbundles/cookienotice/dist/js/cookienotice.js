@@ -39,6 +39,18 @@ if (shouldRun && cookieBanner) {
             triggerEvent('cookie-closed');
         }
     }, 500);
+} else {
+    let cookie = getCookie(consentCookie);
+    let marketingCheckbox = document.getElementById('marketing');
+    let performanceCheckbox = document.getElementById('performance');
+    if (cookie === 'true') {
+        marketingCheckbox.checked = true;
+        performanceCheckbox.checked = true;
+    } else if (cookie === 'marketing') {
+        marketingCheckbox.checked = true;
+    } else if (cookie === 'performance') {
+        performanceCheckbox.checked = true;
+    }
 }
 
 document.addEventListener('click', clickListener);
