@@ -1,25 +1,28 @@
-<div class="cookienotice-banner hidden" id="cookienotice-banner"
-     role="dialog" aria-modal="true" aria-labelledby="cookienotice-banner_title" tabindex="-1">
-    <div class="cookienotice-banner__content">
-        <h1 id="cookienotice-banner_title">
-            {{ 'Onze website gebruikt cookies'|t('cookie-notice') }}
-        </h1>
-        <div class="cookienotice-banner__notice">
-            {{ 'Hallo, onze website maakt gebruik van cookies om de goede werking ervan te garanderen. Daarom kan je de
-                essentiële en functionele cookies niet weigeren. Andere cookies worden enkel geplaatst met jouw
-                toestemming. Door op "Accepteer alles" te klikken ga je akkoord met het opslaan van alle cookies op je
-                computer. Door op "Laat me kiezen" te klikken kan je kiezen welke cookies je toelaat.'|t('cookie-notice') }}
+<section id="cookienotice-banner" class="cookiebanner hidden" aria-labelledby="accept-cookiebanner" role="dialog"
+    aria-modal="true" tabindex="-1">
+    <div class="cookiebanner-content">
+        <div class="cookiebanner-body">
+            <h2 id="accept-cookiebanner" class="cookiebanner-headline">
+                {{ "Onze website gebruikt cookies"|t("cookie-notice") }}
+            </h2>
+            <p>
+                {{ "Hallo, onze website maakt gebruik van cookies om de goede werking ervan te garanderen.
+                Daarom kan je de essentiële en functionele cookies niet weigeren. Andere cookies worden enkel
+                geplaatst met jouw toestemming. Door op 'Accepteer alles' te klikken ga je akkoord met het
+                opslaan van alle cookies op je computer. Door op 'Laat me kiezen' te klikken kan je kiezen welke
+                cookies je toelaat."|t("cookie-notice") }}
+            </p>
         </div>
-        <div class="cookienotice-banner__actions">
-            <a href="#" class="cookienotice-banner__button cookienotice-banner__accept js-cookie-accept notranslate">
-                {{ 'Accepteer alles'|t('cookie-notice') }}
-            </a>
-            <a href="#" class="cookienotice-banner__button cookienotice-banner__settings js-cookie-settings notranslate">
-                {{ 'Laat me kiezen'|t('cookie-notice') }}
-            </a>
-            <a href="#" class="cookienotice-banner__button cookienotice-banner__essentials js-cookie-essentials notranslate">
-                {{ 'Accepteer enkel het essentiële'|t('cookie-notice') }}
-            </a>
+        <div class="cookiebanner-actions">
+            <button class="button button--primary js-cookie-accept notranslate">
+                {{ "Cookies aanvaarden"|t("cookie-notice") }}
+            </button>
+            <button class="cookiebanner-link js-cookie-essentials notranslate">
+                {{ "Enkel essentiële cookies aanvaarden"|t("cookie-notice") }}
+            </button>
+            <button class="cookiebanner-link js-cookie-settings notranslate">
+                {{ "Cookies instellen"|t("cookie-notice") }}
+            </button>
         </div>
     </div>
-</div>
+</section>

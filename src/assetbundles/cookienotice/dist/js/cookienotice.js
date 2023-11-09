@@ -3,27 +3,27 @@ const cookieBlocked = '__cookie_blocked';
 
 let shouldRun;
 
-if (/bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex.test/i.test(navigator.userAgent)) {
+if (/bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex/i.test(navigator.userAgent)) {
     shouldRun = false;
 } else {
-    shouldRun = !getCookie(consentCookie);
+    shouldRun = getCookie(consentCookie) === null ? false : true ;
 }
 
 const mainContentBlock = document.getElementById('mainContentBlock');
 const cookieBanner = document.getElementById('cookienotice-banner');
 const cookieOverlay = document.getElementById('cookienotice-overlay');
-const cookieModal = document.getElementById('cookienoticeModal');
-const closeButton = document.querySelector('.js-modal-close-btn');
+const cookieModal = document.getElementById('cookienotice-modal');
 const htmlElement = document.documentElement;
 
-if (shouldRun && cookieBanner) {
+const cookieObject = {
+    advertising: false,
+    analytics: false,
+    personalization: false
+}
+
+if (!shouldRun && cookieBanner) {
     cookieBanner.classList.remove('hidden');
     cookieOverlay.classList.remove('hidden');
-
-    if (closeButton) {
-        closeButton.setAttribute('disable', 'true');
-        closeButton.classList.add('hidden');
-    }
 
     setMainContentBlockInert();
 
@@ -33,7 +33,7 @@ if (shouldRun && cookieBanner) {
         if (window.getComputedStyle(cookieOverlay).display === 'none' || window.getComputedStyle(cookieBanner).display === 'none') {
             console.log('The cookie notice cannot be shown because it is blocked by a browser plugin.');
             setMainContentBlockInert(false);
-            setCookie(consentCookie, '365', false);
+            setCookie(consentCookie, '365', JSON.stringify(cookieObject));
             setCookie(cookieBlocked, '365', true);
             triggerEvent('cookienotice-banner-blocked');
             triggerEvent('cookie-closed');
@@ -41,14 +41,19 @@ if (shouldRun && cookieBanner) {
     }, 500);
 } else {
     let cookie = getCookie(consentCookie);
+    let cookieData = JSON.parse(cookie);
     let marketingCheckbox = document.getElementById('marketing');
     let performanceCheckbox = document.getElementById('performance');
-    if (cookie === 'true') {
+    let personalizationCheckbox = document.getElementById('personalization');
+    if (cookieData.personalization === true && personalizationCheckbox) {
+        personalizationCheckbox.checked = true;
+    }
+
+    if (cookieData.advertising === true) {
         marketingCheckbox.checked = true;
-        performanceCheckbox.checked = true;
-    } else if (cookie === 'marketing') {
-        marketingCheckbox.checked = true;
-    } else if (cookie === 'performance') {
+    }
+
+    if (cookieData.analytics === true) {
         performanceCheckbox.checked = true;
     }
 }
@@ -68,6 +73,7 @@ function clickListener(event) {
             if (cookieBanner) {
                 cookieBanner.classList.add('hidden');
             }
+
             renderCookieModal();
 
             setTimeout(() => {
@@ -79,27 +85,39 @@ function clickListener(event) {
             }, 500);
         } else if (element.classList.contains('js-cookie-essentials')) {
             event.preventDefault();
-            setCookie(consentCookie, '365', false);
+            setCookie(consentCookie, '365', JSON.stringify(cookieObject));
             closeCookieNotice();
         } else if (element.classList.contains('js-cookie-accept')) {
             event.preventDefault();
-            setCookie(consentCookie, '365', true);
+            cookieObject.analytics = true;
+            cookieObject.advertising = true;
+            cookieObject.personalization = true;
+            setCookie(consentCookie, '365', JSON.stringify(cookieObject));
             closeCookieNotice();
-        } else if (element.classList.contains('js-modal-close')) {
+        } else if (element.classList.contains('js-cookiemodal-close')) {
             event.preventDefault();
 
-            if (isCheckboxChecked("performance") === true && isCheckboxChecked("marketing") === true) {
-                setCookie(consentCookie, "365", true);
+            if (isCheckboxChecked("performance") === true) {
+                cookieObject.analytics = true;
+            } else {
+                cookieObject.analytics = false;
             }
-            if (isCheckboxChecked("performance") === true && isCheckboxChecked("marketing") === false) {
-                setCookie(consentCookie, "365", 2);
+
+            if (isCheckboxChecked("marketing") === true) {
+                cookieObject.advertising = true;
+            } else {
+                cookieObject.advertising = false;
             }
-            if (isCheckboxChecked("performance") === false && isCheckboxChecked("marketing") === true) {
-                setCookie(consentCookie, "365", 3);
+
+            let personalizationCheckbox = document.getElementById('personalization');
+            if (personalizationCheckbox) {
+                if (isCheckboxChecked("personalization")) {
+                    cookieObject.personalization = true;
+                } else {
+                    cookieObject.personalization = false;
+                }
             }
-            if (isCheckboxChecked("performance") === false && isCheckboxChecked("marketing") === false) {
-                setCookie(consentCookie, "365", false);
-            }
+            setCookie(consentCookie, "365", JSON.stringify(cookieObject));
 
             cookieModal.classList.toggle('hidden');
             cookieOverlay.classList.add('hidden');
@@ -159,23 +177,22 @@ function renderCookieModal() {
 
     cookieOverlay.classList.remove('hidden');
 
-    const cookieGDPR = getCookie(consentCookie);
+    const cookie = getCookie(consentCookie);
+    if (cookie) {
+        let cookieData = JSON.parse(cookie)
 
-    if (cookieGDPR === "true") {
-        (document.getElementById('performance')).checked = true;
-        updateCheckbox('performance', true);
-        (document.getElementById('marketing')).checked = true;
-        updateCheckbox('marketing', true);
-    }
-
-    if (cookieGDPR === "2") {
-        (document.getElementById('performance')).checked = true;
-        updateCheckbox('performance', true);
-    }
-
-    if (cookieGDPR === "3") {
-        (document.getElementById('marketing')).checked = true;
-        updateCheckbox('marketing', true);
+        if (cookieData.analytics === true) {
+            (document.getElementById('performance')).checked = true;
+            updateCheckbox('performance', true);
+        }
+        if (cookieData.advertising === true) {
+            (document.getElementById('marketing')).checked = true;
+            updateCheckbox('marketing', true);
+        }
+        if (cookieData.personalization === true) {
+            (document.getElementById('personalization')).checked = true;
+            updateCheckbox('personalization     ', true);
+        }
     }
 }
 
@@ -186,7 +203,8 @@ function setCookie(key, duration, value) {
     }
 
     let expires = date.toUTCString();
-    document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + (expires ? '; expires=' + expires : '') + '; path=/; Secure';
+    console.log(encodeURIComponent(key) + '=' + encodeURIComponent(value) + (expires ? '; expires=' + expires : '') + '; path=/; Secure; SameSite=Strict');
+    document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + (expires ? '; expires=' + expires : '') + '; path=/; Secure; SameSite=Strict';
 }
 
 function setMainContentBlockInert(set = true) {
