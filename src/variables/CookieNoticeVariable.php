@@ -45,7 +45,7 @@ class CookieNoticeVariable
                 $this->modal['template'],
                 [
                     'cookiePolicy' => $this->cookiePolicy,
-                    'personalisation' => $this->personalization
+                    'personalization' => $this->personalization
                 ],
                 $this->modal['mode']);
 
@@ -136,8 +136,8 @@ class CookieNoticeVariable
 
     private function setPersonalisation($settings): void
     {
-        if (!empty($settings["personalisation"])) {
-            $this->personalization = $settings["personalisation"];
+        if (!empty($settings["personalization"])) {
+            $this->personalization = $settings["personalization"];
         }
     }
 }
