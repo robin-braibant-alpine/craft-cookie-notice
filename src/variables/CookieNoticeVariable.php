@@ -29,10 +29,10 @@ class CookieNoticeVariable
     private string $assetBundleNoStyle = CookieNoticeNoStyleAsset::class;
     private bool $personalization = false;
 
-    public function render(array $settings = []): bool
+    public function render(array $settings = []): void
     {
         if ($this->isBot()) {
-            return false;
+            echo "";
         }
         try {
             $this->setCookiePolicy($settings);
@@ -54,11 +54,8 @@ class CookieNoticeVariable
             $this->setOverlay($settings);
 
             $this->setAssetBundle($settings);
-            return true;
-
         } catch (LoaderError|RuntimeError|SyntaxError|Exception $e) {
             Craft::error($e->getMessage(), "cookie-notice");
-            return false;
         }
     }
 
