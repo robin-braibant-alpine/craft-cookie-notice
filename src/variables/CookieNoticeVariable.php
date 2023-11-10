@@ -54,8 +54,6 @@ class CookieNoticeVariable
             $this->setOverlay($settings);
 
             $this->setAssetBundle($settings);
-            return true;
-
         } catch (LoaderError|RuntimeError|SyntaxError|Exception $e) {
             Craft::error($e->getMessage(), "cookie-notice");
             return false;
