@@ -6,11 +6,11 @@
                 "Cookie-instellingen"|t("cookie-notice") }}
             </h2>
             <p>
-                {{ "Onze website bewaart vier soorten cookies. Je kan zelf op elk moment kiezen welke je
+                {{ 'Onze website bewaart vier soorten cookies. Je kan zelf op elk moment kiezen welke je
                 aanvaardt en welke niet. Meer informatie over wat cookies zijn en welke types cookies we
-                verzamelen kan je lezen in ons <a href='{cookieLink}' target='_blank'
-                    class='cookiemodal-pagelink'>cookiebeleid</a>."|t("cookie",{cookieLink:
-                cookiePage.getUrl() ?? craft.entries.section("cookiePolicy").one().getUrl() ?? ""})|raw }}
+                verzamelen kan je lezen in ons <a href="{cookieLink}" target="_blank"
+                    class="cookiemodal-pagelink">cookiebeleid</a>.'|t('cookie-notice',{cookieLink:
+                cookiePage.getUrl() ?? craft.entries.section('cookiePolicy').one().getUrl() ?? ""})|raw }}
             </p>
             <div class="cookiemodal-actions">
                 <button class="button button--primary js-cookie-accept notranslate">
