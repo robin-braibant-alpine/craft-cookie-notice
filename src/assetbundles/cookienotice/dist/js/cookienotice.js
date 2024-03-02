@@ -6,33 +6,33 @@ let shouldRun;
 if (/bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex/i.test(navigator.userAgent)) {
     shouldRun = false;
 } else {
-    shouldRun = getCookie(consentCookie) === null ? false : true ;
+    shouldRun = getCookie(consentCookie) === null ? false : true;
 }
 
-const mainContentBlock = document.getElementById('mainContentBlock');
+const siteContainer = document.getElementById('site-container');
 const cookieBanner = document.getElementById('cookienotice-banner');
-const cookieOverlay = document.getElementById('cookienotice-overlay');
 const cookieModal = document.getElementById('cookienotice-modal');
+const cookieOverlay = document.getElementById('cookienotice-overlay');
 const htmlElement = document.documentElement;
 
 const cookieObject = {
     advertising: false,
     analytics: false,
     personalization: false
-}
+};
 
 if (!shouldRun && cookieBanner) {
     cookieBanner.classList.remove('hidden');
     cookieOverlay.classList.remove('hidden');
 
-    setMainContentBlockInert();
+    setSiteContainerInert();
 
     triggerEvent('cookienotice-banner-opened');
 
     setTimeout(() => {
         if (window.getComputedStyle(cookieOverlay).display === 'none' || window.getComputedStyle(cookieBanner).display === 'none') {
             console.log('The cookie notice cannot be shown because it is blocked by a browser plugin.');
-            setMainContentBlockInert(false);
+            setSiteContainerInert(false);
             setCookie(consentCookie, '365', JSON.stringify(cookieObject));
             setCookie(cookieBlocked, '365', true);
             triggerEvent('cookienotice-banner-blocked');
@@ -78,9 +78,9 @@ function clickListener(event) {
 
             setTimeout(() => {
                 if (window.getComputedStyle(cookieModal).display === 'none') {
-                    alert('The cookie notice cannot be shown because it is blocked by a browser plugin.')
+                    alert('The cookie notice cannot be shown because it is blocked by a browser plugin.');
                 } else {
-                    setMainContentBlockInert();
+                    setSiteContainerInert();
                 }
             }, 500);
         } else if (element.classList.contains('js-cookie-essentials')) {
@@ -121,14 +121,14 @@ function clickListener(event) {
 
             cookieModal.classList.toggle('hidden');
             cookieOverlay.classList.add('hidden');
-            setMainContentBlockInert(false);
+            setSiteContainerInert(false);
             triggerEvent('cookienotice-closed');
             location.reload();
         } else if (element.classList.contains('js-modal-close-btn')) {
             event.preventDefault();
             cookieModal.classList.toggle('hidden');
             cookieOverlay.classList.add('hidden');
-            setMainContentBlockInert(false);
+            setSiteContainerInert(false);
             triggerEvent('cookienotice-closed');
             location.reload();
         } else if (element.classList.contains('js-cookie-performance')) {
@@ -143,7 +143,7 @@ function closeCookieNotice() {
     cookieBanner.classList.add('hidden');
     cookieOverlay.classList.add('hidden');
     cookieModal.classList.add('hidden');
-    setMainContentBlockInert(false);
+    setSiteContainerInert(false);
     triggerEvent('cookienotice-closed');
     location.reload();
 }
@@ -155,8 +155,8 @@ function getCookie(key) {
 
     return (decodeURIComponent(document.cookie.replace
         (new RegExp("(?:(?:^|.*;)\\s*" +
-                encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") +
-                "\\s*\\=\\s*([^;]*).*$)|^.*$"),
+            encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") +
+            "\\s*\\=\\s*([^;]*).*$)|^.*$"),
             "$1")) || null
     );
 }
@@ -172,14 +172,14 @@ function isCheckboxChecked(checkboxId) {
 function renderCookieModal() {
     if (cookieModal) {
         cookieModal.classList.remove('hidden');
-        triggerEvent('cookienotice-modal-opened')
+        triggerEvent('cookienotice-modal-opened');
     }
 
     cookieOverlay.classList.remove('hidden');
 
     const cookie = getCookie(consentCookie);
     if (cookie) {
-        let cookieData = JSON.parse(cookie)
+        let cookieData = JSON.parse(cookie);
 
         if (cookieData.analytics === true) {
             (document.getElementById('performance')).checked = true;
@@ -207,16 +207,16 @@ function setCookie(key, duration, value) {
     document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + (expires ? '; expires=' + expires : '') + '; path=/; Secure; SameSite=Strict';
 }
 
-function setMainContentBlockInert(set = true) {
-    if (mainContentBlock && set) {
-        mainContentBlock.setAttribute('inert', '');
-        mainContentBlock.classList.add('overflow-hidden');
+function setSiteContainerInert(set = true) {
+    if (siteContainer && set) {
         htmlElement.classList.add('overflow-hidden');
+        siteContainer.setAttribute('inert', '');
+        siteContainer.setAttribute('aria-hidden', 'true');
     }
-    if (mainContentBlock && !set) {
-        mainContentBlock.removeAttribute('inert');
-        mainContentBlock.classList.remove('overflow-hidden');
+    if (siteContainer && !set) {
         htmlElement.classList.remove('overflow-hidden');
+        siteContainer.removeAttribute('inert');
+        siteContainer.removeAttribute('aria-hidden');
     }
 }
 
@@ -231,12 +231,12 @@ function updateCheckbox(label, init = false) {
         checkbox.checked = false;
         checkbox.defaultChecked = false;
         if (!init) {
-            triggerEvent(`cookie-prop-${label}-disabled`)
+            triggerEvent(`cookie-prop-${label}-disabled`);
         }
     } else {
         checkbox.checked = true;
         if (!init) {
-            triggerEvent(`cookie-prop-${label}-enabled`)
+            triggerEvent(`cookie-prop-${label}-enabled`);
         }
     }
 }
