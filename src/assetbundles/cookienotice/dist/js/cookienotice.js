@@ -94,7 +94,7 @@ function clickListener(event) {
             cookieObject.personalization = true;
             setCookie(consentCookie, '365', JSON.stringify(cookieObject));
             closeCookieNotice();
-        } else if (element.classList.contains('js-cookiemodal-close')) {
+        } else if (element.classList.contains('js-cookienotice-close')) {
             event.preventDefault();
 
             if (isCheckboxChecked("performance") === true) {
@@ -191,7 +191,7 @@ function renderCookieModal() {
         }
         if (cookieData.personalization === true) {
             (document.getElementById('personalization')).checked = true;
-            updateCheckbox('personalization     ', true);
+            updateCheckbox('personalization', true);
         }
     }
 }
