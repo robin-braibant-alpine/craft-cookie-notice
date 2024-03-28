@@ -15,6 +15,7 @@ class CookieNotice extends Plugin {
             CraftVariable::class,
             CraftVariable::EVENT_INIT,
             function(Event $event) {
+                /** @var CraftVariable $variable */
                 $var = $event->sender;
                 $var->set('cookieNotice', CookieNoticeVariable::class);
             }
