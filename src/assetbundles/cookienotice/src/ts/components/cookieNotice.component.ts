@@ -19,6 +19,7 @@ export class CookieNoticeComponent {
     private cookiePreferencesObject = {
         advertising: false,
         analytics: false,
+        marketing: false,
         personalization: false
     };
 
