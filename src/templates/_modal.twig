@@ -17,7 +17,7 @@ aria-labelledby="accept-cookienotice-modal" role="dialog" aria-modal="true" tabi
                     <div class="cookienotice-option">
                         <div class="cookienotice-check">
                             <input class="js-cookie-essential" type="checkbox" name="essential" id="essential"
-                                disabled="disabled" checked="checked">
+                                checked disabled>
                             <label class="cookienotice-label" for="essential">
                                 {{ "Essentiële cookies"|t("cookie-notice") }}
                             </label>
@@ -30,7 +30,7 @@ aria-labelledby="accept-cookienotice-modal" role="dialog" aria-modal="true" tabi
                     <div class="cookienotice-option">
                         <div class="cookienotice-check">
                             <input class="js-cookie-essential" type="checkbox" name="essential" id="functional"
-                                disabled="disabled" checked="checked">
+                               checked disabled>
                             <label class="cookienotice-label" for="essential">
                                 {{"Functionele cookies"|t("cookie-notice")}}</label>
                         </div>
@@ -64,7 +64,7 @@ aria-labelledby="accept-cookienotice-modal" role="dialog" aria-modal="true" tabi
                             relevante inhoud en aanbiedingen op deze en andere websites."|t("cookie-notice") }}
                         </p>
                     </div>
-                    {% if personalization %}
+                    {% if personalization|json_encode %}
                         <div class="cookienotice-option">
                             <div class="cookienotice-check">
                                 <input class="js-cookie-personalization" type="checkbox" name="cookie-personalization" id="personalization">
