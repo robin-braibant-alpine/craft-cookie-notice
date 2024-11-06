@@ -251,7 +251,7 @@ export class CookieNoticeComponent {
             this.updateCheckbox("performance", true);
         }
         if (cookieData.advertising === true) {
-            (document.getElementById("performance") as HTMLInputElement).checked =
+            (document.getElementById("marketing") as HTMLInputElement).checked =
                 true;
             this.updateCheckbox("marketing", true);
         }

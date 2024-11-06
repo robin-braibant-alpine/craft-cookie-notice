@@ -222,7 +222,7 @@
                             this.updateCheckbox("performance", true);
                         }
                         if (cookieData.advertising === true) {
-                            document.getElementById("performance").checked =
+                            document.getElementById("marketing").checked =
                                 true;
                             this.updateCheckbox("marketing", true);
                         }
