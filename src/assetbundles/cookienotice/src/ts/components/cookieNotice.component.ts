@@ -74,7 +74,7 @@ export class CookieNoticeComponent {
         }
 
         if (element.classList) {
-            if (element.classList.contains("js-cookie-settings")) {
+            if (element.hasAttribute("data-a-cookie-settings")) {
                 event.preventDefault();
                 const cookieBanner = document.getElementById("cookienotice-banner");
 
@@ -91,12 +91,12 @@ export class CookieNoticeComponent {
                         this.setSiteContainerInert();
                     }
                 }, 500);
-            } else if (element.classList.contains("js-cookie-essentials")) {
+            } else if (element.hasAttribute("data-a-cookie-essentials")) {
                 event.preventDefault();
                 this.setCookie(this.consentCookie, "365", JSON.stringify(this.cookiePreferencesObject));
                 this.closeCookieNotice();
                 this.triggerEvent("cookienotice-closed");
-            } else if (element.classList.contains("js-cookie-accept")) {
+            } else if (element.hasAttribute("data-a-cookie-accept")) {
                 event.preventDefault();
                 this.cookiePreferencesObject.analytics = true;
                 this.cookiePreferencesObject.advertising = true;
@@ -104,11 +104,11 @@ export class CookieNoticeComponent {
                 this.setCookie(this.consentCookie, "365", JSON.stringify(this.cookiePreferencesObject));
                 this.closeCookieNotice(this.cookieModal);
                 this.triggerEvent("cookienotice-closed");
-            } else if (element.classList.contains("js-cookienotice-close")) {
+            } else if (element.hasAttribute("data-a-cookienotice-close")) {
                 this.setUserCookiePreferences(event);
-            } else if (element.classList.contains("js-cookie-performance")) {
+            } else if (element.hasAttribute("data-a-cookie-performance")) {
                 this.updateCheckbox("performance");
-            } else if (element.classList.contains("js-cookie-marketing")) {
+            } else if (element.hasAttribute("data-a-cookie-marketing")) {
                 this.updateCheckbox("marketing");
             }
         }
@@ -123,11 +123,10 @@ export class CookieNoticeComponent {
 
         if (cookieModal) {
             this.cookieModal.classList.add("hidden");
-            this.triggerEvent("cookienotice-modal-closed");
         }
 
         this.setSiteContainerInert(false);
-        this.triggerEvent("cookienotice-banner-closed");
+        this.triggerEvent("cookienotice-closed");
         location.reload();
     }
 
@@ -271,12 +270,12 @@ export class CookieNoticeComponent {
 
     private setSiteContainerInert(set = true) {
         if (this.siteContainer && set) {
-            document.documentElement.classList.add("overflow-hidden");
             this.siteContainer.setAttribute("inert", "");
+            document.documentElement.classList.add("overflow-hidden");
         }
         if (this.siteContainer && !set) {
-            document.documentElement.classList.remove("overflow-hidden");
             this.siteContainer.removeAttribute("inert");
+            document.documentElement.classList.remove("overflow-hidden");
         }
     }
 

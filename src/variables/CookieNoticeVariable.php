@@ -16,15 +16,15 @@ use yii\web\View as ViewAlias;
 class CookieNoticeVariable
 {
     private array $banner = [
-        'template' => 'cookie-notice/_banner',
+        'template' => 'cookie-notice/_cookienotice-banner',
         'mode' => View::TEMPLATE_MODE_CP
     ];
     private Entry $cookiePolicy;
     private array $modal = [
-        'template' => 'cookie-notice/_modal',
+        'template' => 'cookie-notice/_cookienotice-modal',
         'mode' => View::TEMPLATE_MODE_CP
     ];
-    private string $overlay = 'cookie-notice/_overlay';
+    private string $overlay = 'cookie-notice/_cookienotice-overlay';
     private string $assetBundle = CookieNoticeAsset::class;
     private string $assetBundleNoStyle = CookieNoticeNoStyleAsset::class;
     private bool $personalization = false;
@@ -47,14 +47,15 @@ class CookieNoticeVariable
                     'cookiePolicy' => $this->cookiePolicy,
                     'personalization' => $this->personalization
                 ],
-                $this->modal['mode']);
+                $this->modal['mode']
+            );
 
             $this->showCookieBanner($settings);
 
             $this->setOverlay($settings);
 
             $this->setAssetBundle($settings);
-        } catch (LoaderError|RuntimeError|SyntaxError|Exception $e) {
+        } catch (LoaderError | RuntimeError | SyntaxError | Exception $e) {
             Craft::error($e->getMessage(), "cookie-notice");
         }
     }

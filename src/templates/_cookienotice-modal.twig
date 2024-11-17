@@ -1,0 +1,92 @@
+<section id="cookienotice-modal" class="cookienotice cookienotice-modal hidden" 
+    aria-labelledby="accept-cookienotice-modal" role="dialog" aria-modal="true" tabindex="-1">
+        <div class="cookienotice-content">
+            <div class="cookienotice-body">
+                <h2 class="cookienotice-headline" id="accept-cookienotice-modal">
+                    {{ "Cookies instellen"|t("cookie-notice") }}
+                </h2>
+                <p>
+                    {{ 'Onze website bewaart vier soorten cookies. Je kan zelf op elk moment kiezen welke je
+                    aanvaardt en welke niet. Meer informatie over wat cookies zijn en welke types cookies we
+                    verzamelen kan je lezen in ons <a href="{cookieLink}" target="_blank"
+                        class="button--a">cookiebeleid</a>.'|t('cookie-notice',{cookieLink:
+                    cookiePage.getUrl() ?? craft.entries.section('cookiePolicy').one().getUrl() ?? ""})|raw }}
+                </p>
+                <form class="cookienotice-form">
+                    <div class="cookienotice-options">
+                        <div class="cookienotice-option">
+                            <div class="cookienotice-check">
+                                <input id="essential" data-a-cookie-essential type="checkbox" name="essential" 
+                                checked disabled>
+                                <label class="cookienotice-label" for="essential">
+                                    {{ "Essentiële cookies"|t("cookie-notice") }}
+                                </label>
+                            </div>
+                            <p class="cookienotice-description">
+                                {{ "zijn om technische redenen noodzakelijk voor de goede werking. Zonder deze
+                                cookies zou het kunnen dat de website niet naar behoren functioneert."|t("cookie-notice") }}
+                            </p>
+                        </div>
+                        <div class="cookienotice-option">
+                            <div class="cookienotice-check">
+                                <input id="functional" data-a-cookie-essential type="checkbox" name="essential" 
+                                checked disabled>
+                                <label class="cookienotice-label" for="essential">
+                                    {{"Functionele cookies"|t("cookie-notice")}}</label>
+                            </div>
+                            <p class="cookienotice-description">
+                                {{ "zijn noodzakelijk voor bepaalde functies op de website. Zonder deze cookies
+                                kunnen sommige onderdelen onbruikbaar worden."|t("cookie-notice") }}
+                            </p>
+                        </div>
+                        <div class="cookienotice-option">
+                            <div class="cookienotice-check">
+                                <input id="performance" data-a-cookie-performance type="checkbox" name="cookie-performance">
+                                <label class="cookienotice-label" for="performance">
+                                    {{ "Analytische cookies"|t("cookie-notice") }}
+                                </label>
+                            </div>
+                            <p class="cookienotice-description">
+                                {{ "laten ons toe om het gebruik van de website anoniem te analyseren en de persoonlijke
+                                gebruikservaring te verbeteren."|t("cookie-notice") }}
+                            </p>
+                        </div>
+                        <div class="cookienotice-option">
+                            <div class="cookienotice-check">
+                                <input id="marketing" data-a-cookie-marketing type="checkbox" name="cookie-marketing">
+                                <label class="cookienotice-label" for="marketing">
+                                    {{ "Marketingcookies"|t("cookie-notice") }}
+                                </label>
+                            </div>
+                            <p class="cookienotice-description">
+                                {{ "hebben als doel het personaliseren van de gebruikservaring en het tonen van
+                                relevante inhoud en aanbiedingen op deze en andere websites."|t("cookie-notice") }}
+                            </p>
+                        </div>
+                        {% if personalization|json_encode %}
+                            <div class="cookienotice-option">
+                                <div class="cookienotice-check">
+                                    <input id="personalization" data-a-cookie-personalization type="checkbox" name="cookie-personalization" >
+                                    <label class="cookienotice-label" for="personalization">
+                                        {{ "Personalisatiecookies"|t("cookie-notice") }}
+                                    </label>
+                                </div>
+                                <p class="cookienotice-description">
+                                    {{ "laten ons toe om het gebruik van de website anoniem te analyseren en de algemene
+                                gebruikservaring te verbeteren"|t("cookie-notice") }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <div class="cookienotice-actions">
+                <button class="button button--primary notranslate" data-a-cookie-accept>
+                    {{ "Alle cookies aanvaarden"|t("cookie-notice") }}
+                </button>
+                <button class="cookienotice-link notranslate" data-a-cookienotice-close>
+                    {{ "Mijn keuze bewaren"|t("cookie-notice") }}
+                </button>
+            </div>
+        </div>
+</section>

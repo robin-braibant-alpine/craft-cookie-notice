@@ -1,0 +1,21 @@
+{
+    "name": "cookienotice-craft-cms",
+    "private": true,
+    "type": "module",
+    "engines": {
+        "node": ">=20"
+    },
+    "scripts": {
+        "build": "webpack"
+    },
+    "devDependencies": {
+        "@types/webpack": "^5.28.5",
+        "terser-webpack-plugin": "^5.3.10",
+        "ts-loader": "^9.4.1",
+        "typescript": "^5.5.4",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-nano": "^1.1.1",
+        "wicg-inert": "^3.1.1"
+    }
+}
