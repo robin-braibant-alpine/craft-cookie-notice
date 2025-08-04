@@ -2,7 +2,7 @@
   "name": "alpinedigital/craft-cookie-notice",
   "description": "A Craft CMS plugin that gives you the cookie notice functionality",
   "type": "craft-plugin",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "keywords": ["craft", "cms", "craftcms", "craft-plugin", "cookies", "notice"],
   "support": {
     "email": "info@alpinedigital.be",
@@ -18,6 +18,10 @@
     },
     {
       "name": "Robin Braibant",
+      "homepage": "https://www.alpinedigtal.be"
+    },
+    {
+      "name": "Tristan Voorjans",
       "homepage": "https://www.alpinedigtal.be"
     }
   ],
