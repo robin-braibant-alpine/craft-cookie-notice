@@ -318,14 +318,12 @@ export class CookieNoticeComponent {
         if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
             gtag = (window as any).gtag;
 
-            console.log('Google Consent Mode updated:', this.cookiePreferencesObject);
         } else {
             (window as any).dataLayer = (window as any).dataLayer || [];
             (window as any).gtag = function() {
                 (window as any).dataLayer.push(arguments);
             };
             gtag = (window as any).gtag;
-            console.log('Google gtag reinitialized:', this.cookiePreferencesObject);
         }
         gtag('consent', 'update', {
             'security_storage': this.cookiePreferencesObject.security_storage ? 'granted' : 'denied',
