@@ -2,7 +2,7 @@
   "name": "alpinedigital/craft-cookie-notice",
   "description": "A Craft CMS plugin that gives you the cookie notice functionality",
   "type": "craft-plugin",
-  "version": "3.2.7.1",
+  "version": "3.2.7.2",
   "keywords": ["craft", "cms", "craftcms", "craft-plugin", "cookies", "notice"],
   "support": {
     "email": "info@alpinedigital.be",
@@ -26,7 +26,7 @@
     }
   ],
   "require": {
-    "craftcms/cms": "^4.0.0"
+    "craftcms/cms": ">=4.0.0"
   },
   "require-dev": {
     "craftcms/phpstan": "dev-main"
