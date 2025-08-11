@@ -9,6 +9,7 @@ use yii\base\Event;
 
 class CookieNotice extends Plugin
 {
+    public string $sourceLanguage = 'nl';
     public function init()
     {
         parent::init();
