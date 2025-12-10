@@ -5,17 +5,17 @@
                 {{ "Deze website gebruikt cookies"|t("cookie-notice") }}
             </h2>
             <p>
-                {{ "Dankzij het gebruik hiervan kunnen we een goed werkende website aanbieden. Door op 'Alle cookies aanvaarden' te klikken ga je akkoord met het opslaan van onze cookies op je computer. Door op 'Cookies instellen' te klikken kan je kiezen welke cookies je wilt toestaan. De noodzakelijke cookies zijn vereist voor de goede werking van de website en kunnen niet worden geweigerd."|t("cookie-notice") }}
+                {{ 'Dankzij het gebruik hiervan kunnen we een goed werkende website aanbieden. Door op "Alle cookies aanvaarden" te klikken ga je akkoord met het opslaan van <a href="{cookieLink}" target="_blank">onze cookies</a> op je computer. Door op "Cookies instellen" te klikken kan je kiezen welke cookies je wilt toestaan. De noodzakelijke cookies zijn vereist voor de goede werking van de website en kunnen niet worden geweigerd.'|t('cookie-notice', {cookieLink: cookiePolicyPage.getUrl() ?? cookiePolicyPage ?? craft.entries.section('cookiePolicy').one().getUrl() ?? ''})|raw }}
             </p>
         </div>
         <div class="cookienotice-actions">
-            <button class="button button--primary notranslate" data-a-cookie-accept>
+            <button class="cookienotice-accept button button--primary notranslate" data-cookie-accept>
                 {{ "Alle cookies aanvaarden"|t("cookie-notice") }}
             </button>
-            <button class="cookienotice-link notranslate" data-a-cookie-essentials>
+            <button class="cookienotice-essentials button button--primary notranslate" data-cookie-essentials>
                 {{ "Enkel minimale cookies aanvaarden"|t("cookie-notice") }}
             </button>
-            <button class="cookienotice-link notranslate" data-a-cookie-settings>
+            <button class="cookienotice-settings button button--outline-primary notranslate" data-cookie-settings>
                 {{ "Cookies instellen"|t("cookie-notice") }}
             </button>
         </div>

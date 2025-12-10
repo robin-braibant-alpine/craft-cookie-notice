@@ -1,18 +1,17 @@
-<section id="cookienotice-modal" class="cookienotice cookienotice-modal hidden"
-         aria-labelledby="accept-cookienotice-modal" role="dialog" aria-modal="true" tabindex="-1">
+<section id="cookienotice-modal" class="hidden cookienotice cookienotice-modal" aria-labelledby="accept-cookienotice-modal" role="dialog" aria-modal="true" tabindex="-1">
     <div class="cookienotice-content">
         <div class="cookienotice-body">
             <h2 class="cookienotice-headline" id="accept-cookienotice-modal">
                 {{ "Cookies instellen"|t("cookie-notice") }}
             </h2>
             <p>
-                {{ 'Onze website bewaart vier soorten cookies. Je kan zelf op elk moment kiezen welke je aanvaardt en welke niet. Meer informatie over wat cookies zijn en welke types cookies we verzamelen kan je lezen in ons <a href="{cookieLink}" target="_blank" class="button--a">cookiebeleid</a>.'|t('cookie-notice',{cookieLink: cookiePage.getUrl() ?? craft.entries.section('cookiePolicy').one().getUrl() ?? ""})|raw }}
+                {{ 'Onze website bewaart vier soorten cookies. Je kan zelf op elk moment kiezen welke je aanvaardt en welke niet. Meer informatie over wat cookies zijn en welke types cookies we verzamelen kan je lezen in ons <a href="{cookieLink}" target="_blank">cookiebeleid</a>.'|t('cookie-notice',{cookieLink: cookiePage.getUrl() ?? craft.entries.section('cookiePolicy').one().getUrl() ?? ''})|raw }}
             </p>
             <form class="cookienotice-form">
                 <div class="cookienotice-options">
                     <div class="cookienotice-option">
                         <div class="cookienotice-check">
-                            <input id="essential" data-a-cookie-essential type="checkbox" name="essential"
+                            <input id="essential" data-cookie-essential type="checkbox" name="essential"
                                    checked disabled>
                             <label class="cookienotice-label" for="essential">
                                 {{ "Noodzakelijke cookies"|t("cookie-notice") }}
@@ -24,7 +23,7 @@
                     </div>
                     <div class="cookienotice-option">
                         <div class="cookienotice-check">
-                            <input id="performance" data-a-cookie-performance type="checkbox" name="cookie-performance">
+                            <input id="performance" data-cookie-performance type="checkbox" name="cookie-performance">
                             <label class="cookienotice-label" for="performance">
                                 {{ "Analytische cookies"|t("cookie-notice") }}
                             </label>
@@ -35,7 +34,7 @@
                     </div>
                     <div class="cookienotice-option">
                         <div class="cookienotice-check">
-                            <input id="marketing" data-a-cookie-marketing type="checkbox" name="cookie-marketing">
+                            <input id="marketing" data-cookie-marketing type="checkbox" name="cookie-marketing">
                             <label class="cookienotice-label" for="marketing">
                                 {{ "Marketingcookies"|t("cookie-notice") }}
                             </label>
@@ -47,7 +46,7 @@
                     {% if personalization|json_encode %}
                         <div class="cookienotice-option">
                             <div class="cookienotice-check">
-                                <input id="personalization" data-a-cookie-personalization type="checkbox"
+                                <input id="personalization" data-cookie-personalization type="checkbox"
                                        name="cookie-personalization">
                                 <label class="cookienotice-label" for="personalization">
                                     {{ "Personalisatiecookies"|t("cookie-notice") }}
@@ -61,11 +60,11 @@
                 </div>
             </form>
         </div>
-        <div class="cookienotice-actions">
-            <button class="button button--primary notranslate" data-a-cookie-accept>
+        <div class="cookienotice-accept cookienotice-actions">
+            <button class="button button--primary notranslate" data-cookie-accept>
                 {{ "Alle cookies aanvaarden"|t("cookie-notice") }}
             </button>
-            <button class="cookienotice-link notranslate" data-a-cookienotice-close>
+            <button class="cookienotice-close button button--primary notranslate" data-cookienotice-close>
                 {{ "Mijn keuze bewaren"|t("cookie-notice") }}
             </button>
         </div>
